@@ -34,6 +34,7 @@ dependencies:
   # whatsapp_unilink: ^1.0.0+1
   animate_do: ^1.7.3
   url_launcher: ^5.7.2
+  font_awesome_flutter: ^8.10.0
 
 
 dev_dependencies:
