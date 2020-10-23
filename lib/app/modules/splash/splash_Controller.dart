@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intui_child/app/modules/home/home_Page.dart';
+import 'package:intui_child/app/routes/app_Routs.dart';
 
 class SplashController extends GetxController {
   Alignment begin = Alignment.center;
-
-  double fTop = Get.height * 0.45;
 
   Color first = Colors.black;
   Color second = Colors.deepPurple[900];
@@ -21,13 +20,11 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
+    // TODO: implement onRead
     super.onReady();
     Future.delayed(Duration(seconds: 1)).then((value) {
-      fTop = Get.height * 0.5;
       begin = Alignment.topCenter;
-      int times = 3;
-      for (var i = 0; i < times; i++) {}
+      Get.toNamed(AppRoutes.HOME);
       update();
     });
   }

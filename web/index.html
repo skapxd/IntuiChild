@@ -16,8 +16,63 @@
 
   <title>intui_child</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+
+    @keyframes float {
+      0% {
+        /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+        transform: translatey(0px);
+      }
+      50% {
+        /* box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2); */
+        transform: translatey(-20px);
+      }
+      100% {
+        /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+        transform: translatey(0px);
+      }
+    }
+    
+    .avatar {
+      background: none;
+      margin: auto;
+      margin-top: 20%;
+      width: 300px;
+      height:300px;
+      box-sizing: border-box;
+      /* border: 5px white solid; */
+      /* border-radius: 50%; */
+      overflow: hidden;
+      /* box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6); */
+      transform: translatey(0px);
+      animation: float 6s ease-in-out infinite;
+      
+    }
+
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica', sans-serif;
+      /* background: rgb(26, 188, 156); */
+      background: -moz-linear-gradient(     #000 ,#000,#23175a, #4527a0   );
+      background: -webkit-linear-gradient(  #000 ,#000,#23175a, #4527a0   );
+      background: linear-gradient(          #000 ,#000,#23175a, #4527a0   );
+    }
+    
+    .avatar img { width: 100%; height: auto; }
+        </style>
+
 </head>
 <body>
+
+  <div class="avatar">
+		<!-- <a href="https://codepen.io/MarioDesigns/"> -->
+			<img src="https://tynkere.com/wp-content/uploads/2020/09/cropped-Mesa-de-trabajo-9-copia-8.png" alt="Skytsunami" />
+		</a>
+	</div>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
