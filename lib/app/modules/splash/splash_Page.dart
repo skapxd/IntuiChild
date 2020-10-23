@@ -1,5 +1,7 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intui_child/app/global_Widgets/animated_Logo.dart';
 import 'package:intui_child/app/modules/splash/splash_Controller.dart';
 
 class SplashPage extends StatelessWidget {
@@ -7,7 +9,6 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
-      init: SplashController(),
       builder: (_) => Scaffold(
         body: Stack(
           children: [
@@ -21,19 +22,17 @@ class SplashPage extends StatelessWidget {
                   colors: [
                     _.first,
                     _.second,
+                    _.three,
+                    // _.fourd
                     // _.three,
                   ],
                 ),
               ),
             ),
-            AnimatedContainer(
-              duration: Duration(seconds: 2),
-              child: Center(
-                child: Image.network(
-                  'https://tynkere.com/wp-content/uploads/2020/09/cropped-Mesa-de-trabajo-9-copia-8.png',
-                  height: 100,
-                ),
-              ),
+            Positioned(
+              top: Get.height * 0.35,
+              child: AnimatedLogo(),
+              left: Get.width * 0.40,
             )
           ],
         ),
@@ -41,18 +40,3 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
-
-//  Container(
-// decoration: BoxDecoration(
-//   gradient: LinearGradient(
-//     // begin: Alignment.topCenter,
-//     begin: Alignment.center,
-//     end: Alignment.bottomCenter,
-//     colors: [
-//       Colors.red[800],
-//       Colors.yellow[800],
-//       Colors.deepPurple[900],
-//     ],
-//   ),
-// ),
-//         ),
