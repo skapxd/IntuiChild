@@ -6,8 +6,14 @@ class HeaderController extends GetxController {
   bool _hoverCasos = false;
   bool _hoverProximos = false;
   bool _hoverFull = false;
-  bool _iconCart = false;
-  bool _perfil = false;
+  bool _hoverIconCart = false;
+  bool _hoverPerfil = false;
+  bool _hoverAuth = false;
+  bool _hoverBtnRegistro = false;
+  bool _hoverBtnEntrar = false;
+  bool _hoverCourseSearch = false;
+  bool _toggleShowCourse = false;
+  int _initValue;
 
   bool get hoverContenido => _hoverContenido;
 
@@ -40,15 +46,51 @@ class HeaderController extends GetxController {
     update();
   }
 
-  bool get iconCart => _iconCart;
-  set iconCart(bool _) {
-    this._iconCart = _;
+  bool get hoverIconCart => _hoverIconCart;
+  set hoverIconCart(bool _) {
+    this._hoverIconCart = _;
     update();
   }
 
-  bool get perfil => _perfil;
-  set perfil(bool _) {
-    this._perfil = _;
+  bool get hoverPerfil => _hoverPerfil;
+  set hoverPerfil(bool _) {
+    this._hoverPerfil = _;
+    update();
+  }
+
+  bool get hoverAuth => _hoverAuth;
+  set hoverAuth(bool _) {
+    this._hoverAuth = _;
+    update();
+  }
+
+  bool get hoverBtnRegistro => _hoverBtnRegistro;
+  set hoverBtnRegistro(bool _) {
+    this._hoverBtnRegistro = _;
+    update();
+  }
+
+  bool get hoverBtnEntrar => _hoverBtnEntrar;
+  set hoverBtnEntrar(bool _) {
+    this._hoverBtnEntrar = _;
+    update();
+  }
+
+  bool get hoverCourseSearch => _hoverCourseSearch;
+  set hoverCourseSearch(bool _) {
+    this._hoverCourseSearch = _;
+    update();
+  }
+
+  bool get toggleShowCourse => _toggleShowCourse;
+  set toggleShowCourse(bool _) {
+    this._toggleShowCourse = _;
+    update();
+  }
+
+  int get initValue => _initValue;
+  set initValue(int _) {
+    this._initValue = _;
     update();
   }
 }

@@ -23,7 +23,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
         .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
 
     controller.addListener(() {
-      print('Status: ${controller.status}');
+      // print('Status: ${controller.status}');
 
       if (controller.status == AnimationStatus.completed) {
         controller.reverse();
@@ -41,7 +41,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
     return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, Widget child) {
-        print(rotation.value);
+        // print(rotation.value);
         return Transform.translate(
           offset: Offset(0, rotation.value),
           child: Image.network(

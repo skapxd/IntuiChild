@@ -29,7 +29,7 @@ class _AnimatedBuyState extends State<AnimatedBuy>
         .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
 
     controller.addListener(() {
-      print('Status: ${controller.status}');
+      // print('Status: ${controller.status}');
 
       if (controller.status == AnimationStatus.completed) {
         controller.reverse();
@@ -51,7 +51,7 @@ class _AnimatedBuyState extends State<AnimatedBuy>
         return AnimatedBuilder(
           animation: controller,
           builder: (BuildContext context, Widget child) {
-            if (_.iconCart) {
+            if (_.hoverIconCart) {
               controller.forward();
             } else {
               controller.reverse();

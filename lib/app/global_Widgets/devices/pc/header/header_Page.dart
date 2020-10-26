@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intui_child/app/global_Widgets/devices/pc/header/local_Widgets/animated_Icon_Buy.dart';
+import 'package:intui_child/app/global_Widgets/search_Course.dart';
 import 'package:intui_child/app/theme/header_Theme_Pc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'header_Controller.dart';
 
@@ -19,9 +21,25 @@ class HeaderPagePC extends StatelessWidget {
             // Imagen
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 0),
-              child: Image.network(
-                'https://tynkere.com/wp-content/uploads/2020/09/cropped-Mesa-de-trabajo-9-copia-8.png',
-                height: 70,
+              child: InkWell(
+                onTap: () async {
+                  const url = 'https://skapxd.github.io/IntuiChild/#/';
+                  if (await canLaunch(url)) {
+                    await launch(
+                      url,
+                    );
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  alignment: Alignment.bottomCenter,
+                  child: Image.network(
+                    'https://tynkere.com/wp-content/uploads/2020/09/cropped-Mesa-de-trabajo-9-copia-8.png',
+                    height: 50,
+                  ),
+                ),
               ),
             ),
             Expanded(
@@ -42,13 +60,15 @@ class HeaderPagePC extends StatelessWidget {
                   duration: Duration(milliseconds: 150),
                   style: TextStyle(
                     color: _.hoverContenido
-                        ? Color(0xffa55afd)
+                        ? HeaderThemePc.primary
                         : HeaderThemePc.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
-                  child: Text(
+                  child: SelectableText(
                     'Contenidos',
+                    // showCursor: true,
+                    toolbarOptions: ToolbarOptions(copy: false),
                   ),
                 ),
               ),
@@ -69,7 +89,7 @@ class HeaderPagePC extends StatelessWidget {
                   duration: Duration(milliseconds: 150),
                   style: TextStyle(
                     color: _.hoverMasterClass
-                        ? Color(0xffa55afd)
+                        ? HeaderThemePc.primary
                         : HeaderThemePc.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -81,7 +101,7 @@ class HeaderPagePC extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: context.width * 0.02,
+              width: context.width * 0.002,
             ),
 
             // Casos
@@ -95,8 +115,9 @@ class HeaderPagePC extends StatelessWidget {
                 child: AnimatedDefaultTextStyle(
                   duration: Duration(milliseconds: 150),
                   style: TextStyle(
-                    color:
-                        _.hoverCasos ? Color(0xffa55afd) : HeaderThemePc.text,
+                    color: _.hoverCasos
+                        ? HeaderThemePc.primary
+                        : HeaderThemePc.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -107,7 +128,7 @@ class HeaderPagePC extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: context.width * 0.02,
+              width: context.width * 0.002,
             ),
 
             // Proximos
@@ -122,7 +143,7 @@ class HeaderPagePC extends StatelessWidget {
                   duration: Duration(milliseconds: 150),
                   style: TextStyle(
                     color: _.hoverProximos
-                        ? Color(0xffa55afd)
+                        ? HeaderThemePc.primary
                         : HeaderThemePc.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -134,7 +155,7 @@ class HeaderPagePC extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: context.width * 0.02,
+              width: context.width * 0.002,
             ),
 
             // Full
@@ -148,7 +169,9 @@ class HeaderPagePC extends StatelessWidget {
                 child: AnimatedDefaultTextStyle(
                   duration: Duration(milliseconds: 150),
                   style: TextStyle(
-                    color: _.hoverFull ? Color(0xffa55afd) : HeaderThemePc.text,
+                    color: _.hoverFull
+                        ? HeaderThemePc.primary
+                        : HeaderThemePc.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -160,13 +183,13 @@ class HeaderPagePC extends StatelessWidget {
             ),
             Expanded(
               child: Container(),
-              flex: 5,
+              flex: 1,
             ),
 
             // Icon cart
             InkWell(
               onTap: () {},
-              onHover: (value) => _.iconCart = value,
+              onHover: (value) => _.hoverIconCart = value,
               child: Container(
                 alignment: Alignment.bottomCenter,
                 width: 100,
@@ -176,47 +199,151 @@ class HeaderPagePC extends StatelessWidget {
             ),
             Expanded(
               child: Container(),
-              flex: 5,
+              flex: 1,
             ),
+            // SizedBox(
+            //   width: context.width * 0.02,
+            // ),
 
-            // User
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.perfil = value,
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                alignment: Alignment.bottomCenter,
-                // width: 200,
-                height: 50,
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Color.fromRGBO(0, 0, 0, 0),
-                      child: Icon(FontAwesomeIcons.user),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    AnimatedDefaultTextStyle(
-                      duration: Duration(milliseconds: 150),
-                      style: TextStyle(
-                        color:
-                            _.perfil ? Color(0xffa55afd) : HeaderThemePc.text,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                      child: Text(
-                        'Hola  Manuel',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            Container(
+              width: 200,
+              child: Search(),
             ),
 
             Expanded(
               child: Container(),
-              flex: 5,
+              flex: 1,
+            ),
+
+            // SizedBox(
+            //   width: context.width * 0.02,
+            // ),
+
+            // User
+            _.hoverAuth
+                ? _user(_)
+                : Container(
+                    margin: EdgeInsets.only(top: 10),
+                    alignment: Alignment.bottomCenter,
+                    height: 50,
+                    child: Row(
+                      children: [
+                        btnEntrar(_),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        btnRegistro(_),
+                      ],
+                    ),
+                  ),
+
+            Expanded(
+              child: Container(),
+              flex: 1,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell btnRegistro(HeaderController _) {
+    return InkWell(
+      onHover: (value) => _.hoverBtnRegistro = value,
+      borderRadius: BorderRadius.circular(10),
+      onTap: () {},
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        height: 37,
+        width: 80,
+        decoration: BoxDecoration(
+          color: _.hoverBtnRegistro
+              ? HeaderThemePc.second
+              : HeaderThemePc.transparent,
+          border: new Border.all(
+            color: HeaderThemePc.primary,
+            width: 3.0,
+          ),
+          borderRadius: new BorderRadius.circular(5.0),
+        ),
+        alignment: Alignment.center,
+        child: AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 150),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: HeaderThemePc.text,
+          ),
+          child: Text(
+            'Registro',
+          ),
+        ),
+      ),
+    );
+  }
+
+  InkWell btnEntrar(HeaderController _) {
+    return InkWell(
+      onHover: (value) => _.hoverBtnEntrar = value,
+      borderRadius: BorderRadius.circular(10),
+      onTap: () {},
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 150),
+        height: 37,
+        width: 80,
+        decoration: BoxDecoration(
+          color:
+              _.hoverBtnEntrar ? HeaderThemePc.second : HeaderThemePc.primary,
+          border: new Border.all(
+            color:
+                _.hoverBtnEntrar ? HeaderThemePc.second : HeaderThemePc.primary,
+            width: 3.0,
+          ),
+          borderRadius: new BorderRadius.circular(5.0),
+        ),
+        alignment: Alignment.center,
+        child: AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 150),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: HeaderThemePc.text,
+          ),
+          child: Text(
+            'Entrar',
+          ),
+        ),
+      ),
+    );
+  }
+
+  InkWell _user(HeaderController _) {
+    return InkWell(
+      onTap: () {},
+      onHover: (value) => _.hoverPerfil = value,
+      child: Container(
+        margin: EdgeInsets.only(top: 10),
+        alignment: Alignment.bottomCenter,
+        // width: 200,
+        height: 50,
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: Color.fromRGBO(0, 0, 0, 0),
+              child: Icon(FontAwesomeIcons.user),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 150),
+              style: TextStyle(
+                color:
+                    _.hoverPerfil ? HeaderThemePc.primary : HeaderThemePc.text,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+              child: Text(
+                'Hola  Manuel',
+              ),
             ),
           ],
         ),
