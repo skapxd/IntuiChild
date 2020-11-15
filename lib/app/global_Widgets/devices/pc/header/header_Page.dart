@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:intui_child/app/global_Widgets/devices/pc/header/local_Widgets/animated_Icon_Buy.dart';
+import 'package:hovering/hovering.dart';
 import 'package:intui_child/app/global_Widgets/search_Course.dart';
 import 'package:intui_child/app/theme/header_Theme_Pc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,6 +11,7 @@ import 'header_Controller.dart';
 class HeaderPagePC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Firebase
     return GetBuilder<HeaderController>(
       init: HeaderController(),
       builder: (_) => Padding(
@@ -48,138 +49,51 @@ class HeaderPagePC extends StatelessWidget {
             ),
 
             // Contenidos
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverContenido = value,
-              child: Container(
-                margin: EdgeInsets.only(left: 20),
-                width: 100,
-                alignment: Alignment.bottomCenter,
-                height: 50,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 150),
-                  style: TextStyle(
-                    color: _.hoverContenido
-                        ? HeaderThemePc.primary
-                        : HeaderThemePc.text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  child: SelectableText(
-                    'Contenidos',
-                    // showCursor: true,
-                    toolbarOptions: ToolbarOptions(copy: false),
-                  ),
-                ),
-              ),
+            HoverText(
+              text: 'Contenido',
+              color: HeaderThemePc.text,
+              hoverColor: HeaderThemePc.primary,
             ),
+
             SizedBox(
-              width: context.width * 0.02,
+              width: context.width * 0.005,
             ),
 
             // Master Class
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverMasterClass = value,
-              child: Container(
-                width: 100,
-                alignment: Alignment.bottomCenter,
-                height: 50,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 150),
-                  style: TextStyle(
-                    color: _.hoverMasterClass
-                        ? HeaderThemePc.primary
-                        : HeaderThemePc.text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  child: Text(
-                    'Master Class',
-                  ),
-                ),
-              ),
+            HoverText(
+              text: 'Master Class',
+              color: HeaderThemePc.text,
+              hoverColor: HeaderThemePc.primary,
             ),
             SizedBox(
-              width: context.width * 0.002,
+              width: context.width * 0.005,
             ),
 
             // Casos
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverCasos = value,
-              child: Container(
-                width: 100,
-                alignment: Alignment.bottomCenter,
-                height: 50,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 150),
-                  style: TextStyle(
-                    color: _.hoverCasos
-                        ? HeaderThemePc.primary
-                        : HeaderThemePc.text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  child: Text(
-                    'Casos',
-                  ),
-                ),
-              ),
+            HoverText(
+              text: 'Casos',
+              color: HeaderThemePc.text,
+              hoverColor: HeaderThemePc.primary,
             ),
             SizedBox(
-              width: context.width * 0.002,
+              width: context.width * 0.005,
             ),
 
             // Proximos
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverProximos = value,
-              child: Container(
-                // width: 100,
-                alignment: Alignment.bottomCenter,
-                height: 50,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 150),
-                  style: TextStyle(
-                    color: _.hoverProximos
-                        ? HeaderThemePc.primary
-                        : HeaderThemePc.text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  child: Text(
-                    'Proximos',
-                  ),
-                ),
-              ),
+            HoverText(
+              text: 'Proximos',
+              color: HeaderThemePc.text,
+              hoverColor: HeaderThemePc.primary,
             ),
             SizedBox(
-              width: context.width * 0.002,
+              width: context.width * 0.005,
             ),
 
             // Full
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverFull = value,
-              child: Container(
-                width: 100,
-                alignment: Alignment.bottomCenter,
-                height: 50,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(milliseconds: 150),
-                  style: TextStyle(
-                    color: _.hoverFull
-                        ? HeaderThemePc.primary
-                        : HeaderThemePc.text,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                  child: Text(
-                    'Full',
-                  ),
-                ),
-              ),
+            HoverText(
+              text: 'Full',
+              color: HeaderThemePc.text,
+              hoverColor: HeaderThemePc.primary,
             ),
             Expanded(
               child: Container(),
@@ -187,25 +101,37 @@ class HeaderPagePC extends StatelessWidget {
             ),
 
             // Icon cart
-            InkWell(
-              onTap: () {},
-              onHover: (value) => _.hoverIconCart = value,
-              child: Container(
-                alignment: Alignment.bottomCenter,
+
+            HoverCrossFadeWidget(
+              duration: Duration(milliseconds: 300),
+              firstChild: Container(
+                margin: EdgeInsets.only(top: 10),
                 width: 100,
                 height: 50,
-                child: AnimatedBuy(),
+                child: Icon(
+                  FontAwesomeIcons.cartArrowDown,
+                  size: 20,
+                  color: HeaderThemePc.text,
+                ),
+              ),
+              secondChild: Container(
+                margin: EdgeInsets.only(top: 10),
+                width: 100,
+                height: 50,
+                child: Icon(
+                  FontAwesomeIcons.cartArrowDown,
+                  color: Color(0xffa55afd),
+                  size: 20,
+                ),
               ),
             ),
+
             Expanded(
               child: Container(),
               flex: 1,
             ),
-            // SizedBox(
-            //   width: context.width * 0.02,
-            // ),
-
             Container(
+              margin: EdgeInsets.only(top: 10),
               width: 200,
               child: Search(),
             ),
@@ -214,10 +140,6 @@ class HeaderPagePC extends StatelessWidget {
               child: Container(),
               flex: 1,
             ),
-
-            // SizedBox(
-            //   width: context.width * 0.02,
-            // ),
 
             // User
             _.hoverAuth
@@ -346,6 +268,60 @@ class HeaderPagePC extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HoverText extends StatelessWidget {
+  final String text;
+  final Color color;
+  final Color hoverColor;
+  final VoidCallback onTap;
+
+  const HoverText({
+    Key key,
+    this.text,
+    this.color,
+    this.hoverColor,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return HoverCrossFadeWidget(
+      duration: Duration(milliseconds: 300),
+      firstChild: InkWell(
+        child: Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+          // color: Colors.white.withOpacity(0.5),
+          height: 50,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      secondChild: InkWell(
+        onTap: onTap,
+        child: Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+          height: 50,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: hoverColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

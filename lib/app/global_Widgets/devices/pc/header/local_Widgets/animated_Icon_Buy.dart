@@ -66,3 +66,25 @@ class _AnimatedBuyState extends State<AnimatedBuy>
     );
   }
 }
+
+// HoverCrossFadeWidget(
+//               duration: Duration(milliseconds: 300),
+//               firstChild: Container(
+//                 // color: Colors.white,
+//                 width: 30,
+//                 child: Icon(
+//                   FontAwesomeIcons.cartArrowDown,
+//                   textDirection: TextDirection.rtl,
+//                   // size: 20,
+//                   color: HeaderThemePc.text,
+//                 ),
+//               ),
+//               secondChild: Container(
+//                 width: 30,
+//                 child: Icon(
+//                   FontAwesomeIcons.cartArrowDown,
+//                   color: Color(0xffa55afd),
+//                   // size: 20,
+//                 ),
+//               ),
+//             ),

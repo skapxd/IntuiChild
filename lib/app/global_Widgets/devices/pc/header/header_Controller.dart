@@ -15,6 +15,42 @@ class HeaderController extends GetxController {
   bool _toggleShowCourse = false;
   int _initValue;
 
+  final duplicateItems = List<String>.generate(10000, (i) => "Curso $i");
+
+  var items = List<String>();
+
+  void filterSearchResults(String query) {
+    List<String> dummySearchList = List<String>();
+
+    dummySearchList.addAll(duplicateItems);
+
+    if (query.isNotEmpty) {
+      List<String> dummyListData = List<String>();
+
+      dummySearchList.forEach(
+        (item) {
+          if (item.contains(query)) {
+            dummyListData.add(item);
+          }
+        },
+      );
+      items.clear();
+      items.addAll(dummyListData);
+      update();
+      return;
+    } else {
+      items.clear();
+      items.addAll(duplicateItems);
+      update();
+    }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    items.addAll(duplicateItems);
+  }
+
   bool get hoverContenido => _hoverContenido;
 
   set hoverContenido(bool _) {

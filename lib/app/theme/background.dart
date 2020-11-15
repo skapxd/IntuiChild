@@ -10,19 +10,22 @@ class Background {
       initState: (_) {},
       builder: (_) {
         return Container(
+          // width: Dou,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.center,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black,
-                Colors.deepPurple[900],
-                Colors.deepPurple[800],
-              ],
-            ),
+            color: Color(0xff080113),
+            // gradient: LinearGradient(
+            //   begin: Alignment.center,
+            //   end: Alignment.bottomCenter,
+            //   colors: [
+            //     Colors.black,
+            //     Colors.deepPurple[900],
+            //     Colors.deepPurple[800],
+            //   ],
+            // ),
           ),
         );
       },
     );
   }
 }
+//
