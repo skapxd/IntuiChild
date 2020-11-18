@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hovering/hovering.dart';
 import 'package:intui_child/app/global_Widgets/devices/pc/header/header_Page.dart';
 // import 'package:intui_child/app/theme/background.dart';
+import 'package:intui_child/app/utils/globals.dart' as globals;
+import 'package:mercadopago_sdk/mercadopago_sdk.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'devices/pc/../../home_Controller.dart';
 
@@ -42,7 +46,7 @@ class HomePage extends StatelessWidget {
                       categoria: 'Categoria',
                       nombreCurso: 'Creacion de curso Flutter',
                       evaluacion: 0,
-                      precio: '0\$',
+                      precio: '20.000\$',
                     ),
                     Product(
                       urlImagen:
@@ -279,15 +283,16 @@ class Product extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Stack(
                 children: [
-                  InkWell(
-                    child: Image.network(
-                      urlImagen,
-                      fit: BoxFit.cover,
-                    ),
+                  Image.network(
+                    urlImagen,
+                    height: 300,
+                    width: 300,
+                    fit: BoxFit.cover,
                   ),
                   GetBuilder<HomeController>(
                     builder: (_) {
                       return HoverAnimatedContainer(
+                        cursor: SystemMouseCursors.click,
                         duration: Duration(milliseconds: 300),
                         height: 300,
                         width: 300,
@@ -368,7 +373,13 @@ class Product extends StatelessWidget {
             height: 10,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () => armarPreferencia(
+              email: 'manuellondo132@gmail.com',
+              name: 'manuel',
+              precio:
+                  int.parse(precio.replaceAll('.', '').replaceAll('\$', '')),
+              producto: nombreCurso,
+            ),
             child: HoverAnimatedContainer(
               height: 40,
               width: 150,
@@ -401,5 +412,53 @@ class Product extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<Map<String, dynamic>> armarPreferencia({
+    @required String producto,
+    @required int precio,
+    @required String name,
+    @required String email,
+  }) async {
+    var mp = MP(globals.mpClientID, globals.mpClientSecret);
+    var preference = {
+      "items": [
+        {
+          "title": producto,
+          "description": "Description",
+          "quantity": 1,
+          "currency_id": "COP",
+          "unit_price": precio,
+        }
+      ],
+      "payer": {"name": name, "email": email},
+      "marketplace": "Pyndele",
+      // "payment_methods": {
+      //   "excluded_payment_types": [
+      //     {"id": "ticket"},
+      //     {"id": "atm"}
+      //   ]
+      // }
+    };
+
+    var result = await mp.createPreference(preference);
+
+    final url = result['response']['init_point'];
+
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceWebView: true,
+        universalLinksOnly: true,
+        enableJavaScript: true,
+        enableDomStorage: true,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+
+    print(result);
+
+    return result;
   }
 }

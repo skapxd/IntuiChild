@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hovering/hovering.dart';
@@ -28,6 +29,10 @@ class HeaderPagePC extends StatelessWidget {
                   if (await canLaunch(url)) {
                     await launch(
                       url,
+                      forceWebView: true,
+                      universalLinksOnly: true,
+                      enableJavaScript: true,
+                      enableDomStorage: true,
                     );
                   } else {
                     throw 'Could not launch $url';
@@ -50,6 +55,7 @@ class HeaderPagePC extends StatelessWidget {
 
             // Contenidos
             HoverText(
+              onTap: () => print('hola'),
               text: 'Contenido',
               color: HeaderThemePc.text,
               hoverColor: HeaderThemePc.primary,
@@ -291,6 +297,7 @@ class HoverText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HoverCrossFadeWidget(
+      // cursor: SystemMouseCursors.none,
       duration: Duration(milliseconds: 300),
       firstChild: InkWell(
         child: Container(
