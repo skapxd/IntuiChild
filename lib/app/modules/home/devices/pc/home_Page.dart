@@ -8,6 +8,7 @@ import 'package:intui_child/app/global_Widgets/devices/pc/header/header_Page.dar
 import 'package:intui_child/app/utils/globals.dart' as globals;
 import 'package:mercadopago_sdk/mercadopago_sdk.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_web_view/easy_web_view.dart';
 
 import 'devices/pc/../../home_Controller.dart';
 
@@ -374,6 +375,7 @@ class Product extends StatelessWidget {
           ),
           InkWell(
             onTap: () => armarPreferencia(
+              context: context,
               email: 'manuellondo132@gmail.com',
               name: 'manuel',
               precio:
@@ -419,12 +421,15 @@ class Product extends StatelessWidget {
     @required int precio,
     @required String name,
     @required String email,
+    @required BuildContext context,
   }) async {
     var mp = MP(globals.mpClientID, globals.mpClientSecret);
     var preference = {
       "items": [
         {
           "title": producto,
+          "pictureUrl":
+              'https://tynkere.com/wp-content/uploads/2020/09/flutter-300x300.jpeg',
           "description": "Description",
           "quantity": 1,
           "currency_id": "COP",
@@ -444,18 +449,38 @@ class Product extends StatelessWidget {
     var result = await mp.createPreference(preference);
 
     final url = result['response']['init_point'];
+    // final url = result['response']['sandbox_init_point'];
 
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceWebView: true,
-        universalLinksOnly: true,
-        enableJavaScript: true,
-        enableDomStorage: true,
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
+    // if (await canLaunch(url)) {
+    //   await launch(
+    //     url,
+    //     forceWebView: true,
+    //     universalLinksOnly: true,
+    //     enableJavaScript: true,
+    //     enableDomStorage: true,
+    //   );
+    // } else {
+    //   throw 'Could not launch $url';
+    // }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Color(0xff222222),
+          contentPadding: EdgeInsets.zero,
+          content: Container(
+            width: 700,
+            child: EasyWebView(
+              src: url,
+              isHtml: false,
+              isMarkdown: false,
+              onLoaded: () {},
+            ),
+          ),
+        );
+      },
+    );
 
     print(result);
 
